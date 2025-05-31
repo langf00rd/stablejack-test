@@ -1,28 +1,21 @@
-import { RenderBalanceMessage } from "@/components/balance-message";
-import SkeletonAnimation from "@/components/skeleton";
-import { bigIntToNumber } from "@/utils";
+import { useContract } from "@/hooks/use-contract";
+import { RenderBalanceMessage } from "@/lib/components/balance-message";
+import SkeletonAnimation from "@/lib/components/skeleton";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useReadContract } from "wagmi";
-
-// @ts-ignore
-import abi from "../configs/abi.json";
 
 export default function Home() {
-  const { address, isConnected } = useAccount();
-
-  const result = useReadContract({
-    abi: abi.data,
-    address: abi.address,
-    functionName: "balanceOf",
-    args: [address],
-  });
-
-  const balance = bigIntToNumber(result.data);
-
+  const { balance, contractName, isConnected } = useContract();
   return (
     <div className="max-w-[600px] mx-auto">
       <header className="justify-between flex items-center p-5">
-        <h1 className="font-bold text-xl">token thing</h1>
+        <h1 className="font-bold text-xl flex items-center gap-2">
+          {!contractName ? (
+            <SkeletonAnimation className="w-[100px]" show />
+          ) : (
+            <>{contractName}</>
+          )}{" "}
+          Dashboard
+        </h1>
         <ConnectButton />
       </header>
       <main className="p-5">
@@ -35,7 +28,9 @@ export default function Home() {
             {isNaN(balance) ? (
               <SkeletonAnimation show />
             ) : (
-              <RenderBalanceMessage balance={balance} />
+              <>
+                <RenderBalanceMessage balance={balance} />
+              </>
             )}
           </div>
         )}
