@@ -33,7 +33,7 @@ export function useContract() {
 
   return {
     balance: bigIntToNumber(balanceOfResult.data),
-    contractName: nameResult.data,
+    contractName: String(nameResult.data),
     mint,
     isConnected,
     abi,
