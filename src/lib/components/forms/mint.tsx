@@ -44,7 +44,7 @@ export default function MintForm() {
         />
       </fieldset>
       <Button type="submit" disabled={!validateForm() || writePending}>
-        {writePending ? "Pending..." : "Continue"}
+        {writePending ? "Pending..." : "Mint token"}
       </Button>
     </form>
   );

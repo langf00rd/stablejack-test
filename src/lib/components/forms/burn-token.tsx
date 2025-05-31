@@ -30,7 +30,7 @@ export default function BurnTokenForm() {
       </fieldset>
       <Button variant="destructive" type="submit" disabled={writePending}>
         <FlameIcon />
-        Burn token
+        {writePending ? "Pending..." : "Burn token"}
       </Button>
     </form>
   );
