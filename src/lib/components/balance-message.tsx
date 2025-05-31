@@ -1,5 +1,5 @@
-import AllowanceForm from "./forms/allowance";
 import SkeletonAnimation from "./skeleton";
+import Welcome from "./welcome";
 
 export function RenderBalanceMessage(props: { balance: number }) {
   if (isNaN(props.balance)) return <SkeletonAnimation show />;
@@ -9,11 +9,5 @@ export function RenderBalanceMessage(props: { balance: number }) {
         Access Denied. You need at least 1 token to proceed
       </h1>
     );
-  } else
-    return (
-      <div className="space-y-5">
-        <h1 className="text-neutral-600 text-xl">Welcome to the Dashboard</h1>
-        <AllowanceForm />
-      </div>
-    );
+  } else return <Welcome />;
 }
